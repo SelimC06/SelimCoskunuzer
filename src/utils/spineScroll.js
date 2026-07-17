@@ -2,9 +2,33 @@
 // never past the page's natural end — capping there instead of overshooting
 // keeps whatever comes after `el` (e.g. the footer) fully visible, even if
 // it means landing slightly short of dead-center.
-function centerElement(el) {
+//
+// `options.minTopElementId`: never land above that element's own top, so a
+// section with little content below it (Contact) can't leave the previous
+// section's tail end still showing above it.
+// `options.mustFitBottomElementId`: never land short of having that
+// element's bottom edge fully in view, so e.g. the footer's actual content
+// isn't left just below the fold.
+function centerElement(el, options = {}) {
     const rect = el.getBoundingClientRect();
-    const target = window.scrollY + rect.top - (window.innerHeight - rect.height) / 2;
+    let target = window.scrollY + rect.top - (window.innerHeight - rect.height) / 2;
+
+    if (options.minTopElementId) {
+        const minEl = document.getElementById(options.minTopElementId);
+        if (minEl) {
+            const minRect = minEl.getBoundingClientRect();
+            target = Math.max(target, window.scrollY + minRect.top);
+        }
+    }
+
+    if (options.mustFitBottomElementId) {
+        const fitEl = document.getElementById(options.mustFitBottomElementId);
+        if (fitEl) {
+            const fitRect = fitEl.getBoundingClientRect();
+            target = Math.max(target, window.scrollY + fitRect.bottom - window.innerHeight);
+        }
+    }
+
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     window.scrollTo({ top: Math.min(Math.max(0, target), maxScroll), behavior: "smooth" });
 }
@@ -34,8 +58,10 @@ function scrollToMatchAboutLanding(el) {
 export function scrollSpineNode(sectionId, targetId) {
     const el = document.getElementById(targetId);
     if (!el) return;
-    if (sectionId === "about" || sectionId === "contact") {
+    if (sectionId === "about") {
         centerElement(el);
+    } else if (sectionId === "contact") {
+        centerElement(el, { minTopElementId: "contact", mustFitBottomElementId: "site-footer" });
     } else {
         scrollToMatchAboutLanding(el);
     }

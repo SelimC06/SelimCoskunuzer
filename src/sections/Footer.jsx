@@ -13,7 +13,17 @@ const iconStyle = (src) => ({
 
 const Footer = () => {
     return (
-        <section className="font-mono flex flex-wrap items-center justify-between pb-3 text-xs uppercase tracking-wide text-maroon/80 c-space">
+        <section
+            id="site-footer"
+            className="font-mono flex flex-wrap items-center justify-between pb-3 text-xs uppercase tracking-wide text-maroon/80 c-space"
+            style={{ paddingTop: "max(0px, calc(100vh - 720px))" }}
+            // Scroll headroom for the Contact spine node: it now has a floor
+            // (never land above #contact's own top, so Experience's tail end
+            // can't still be showing) that needs more room to reach than the
+            // page's natural end provides at taller viewports. Sits above the
+            // footer's own content so the footer itself still ends up fully
+            // visible rather than pushed below the fold.
+        >
             <div className="mb-4 flex items-center gap-3 w-full">
                 <span className="text-maroon/60 shrink-0">4 Nodes Linked</span>
                 <div className="bg-linear-to-r from-maroon/60 via-maroon/60 to-transparent h-px flex-1"/>
