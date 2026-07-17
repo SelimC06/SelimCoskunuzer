@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 
 // `centerTargetId` is what each section's spine node scrolls to (instead of
 // jumping to the section's top edge). Home keeps plain top-of-page anchor
-// behavior. About centers its own photo; Experience and Contact land at
-// whatever spot that leaves About's heading at, via scrollSpineNode.
+// behavior. About and Contact each center their own photo; Experience lands
+// at whatever spot that leaves About's heading at, via scrollSpineNode.
 export const sections = [
     { id: "home", label: "Home" },
     { id: "about", label: "About", centerTargetId: "about-photo" },
     { id: "Experience", label: "Experience", centerTargetId: "experience-heading-block" },
-    { id: "contact", label: "Contact", centerTargetId: "contact-heading-block" },
+    { id: "contact", label: "Contact", centerTargetId: "contact-photo" },
 ];
 
 export function useActiveSection() {

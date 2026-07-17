@@ -53,7 +53,7 @@ const Contact = () => {
         </AnimatePresence>
         {/* LEFT IMAGE */}
         <div className="flex-1 flex justify-center lg:justify-end pr-6 lg:pr-10">
-        <div className="reg-marks w-full max-w-2xl rounded-3xl border-4 border-maroon shadow-lg overflow-hidden">
+        <div id="contact-photo" className="reg-marks w-full max-w-2xl rounded-3xl border-4 border-maroon shadow-lg overflow-hidden">
             <RegMarks />
             <img
             src="/assets/contact_image.jpg"
