@@ -1,4 +1,5 @@
 import { useActiveSection, sections } from "../hook/useActiveSection";
+import { scrollSpineNode } from "../utils/spineScroll";
 
 // A persistent left-edge rail of nodes and edges standing in for site nav —
 // turns scrolling through the page into traversing a small graph, echoing
@@ -11,7 +12,7 @@ const NetworkSpine = () => {
     const handleClick = (e, s) => {
         if (!s.centerTargetId) return; // home keeps the plain top-of-page jump
         e.preventDefault();
-        document.getElementById(s.centerTargetId)?.scrollIntoView({ behavior: "smooth", block: "center" });
+        scrollSpineNode(s.id, s.centerTargetId);
     };
 
     return (

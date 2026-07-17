@@ -58,7 +58,7 @@ const About = () => {
 
             </div>
             <div className="flex-1 flex justify-center lg:justify-end">
-                <div className="reg-marks">
+                <div id="about-photo" className="reg-marks">
                     <RegMarks />
                     <img
                         src="/assets/me.jpg"

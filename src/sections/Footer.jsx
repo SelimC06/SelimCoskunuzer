@@ -13,6 +13,7 @@ const iconStyle = (src) => ({
 
 const Footer = () => {
     return (
+        <>
         <section className="font-mono flex flex-wrap items-center justify-between pb-3 text-xs uppercase tracking-wide text-maroon/80 c-space">
             <div className="mb-4 flex items-center gap-3 w-full">
                 <span className="text-maroon/60 shrink-0">4 Nodes Linked</span>
@@ -35,6 +36,12 @@ const Footer = () => {
             </div>
             <p>&copy; 2026 Selim. All rights reserved</p>
         </section>
+        {/* scroll headroom so the Contact spine node can reach the same landing
+            position as About/Experience even though this is the last section —
+            without it, the browser physically can't scroll further than the
+            page's natural end. Sized in vh so it scales with viewport height. */}
+        <div className="min-h-[35vh]" aria-hidden="true" />
+        </>
     )
 }
 
