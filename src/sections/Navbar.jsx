@@ -1,37 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
-
-const sections = [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "Experience", label: "Experience" },
-    { id: "contact", label: "Contact" },
-];
-
-function useActiveSection() {
-    const [active, setActive] = useState("home");
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                const visible = entries
-                    .filter((entry) => entry.isIntersecting)
-                    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-                if (visible) setActive(visible.target.id);
-            },
-            { rootMargin: "-40% 0px -55% 0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
-        );
-
-        sections.forEach(({ id }) => {
-            const el = document.getElementById(id);
-            if (el) observer.observe(el);
-        });
-
-        return () => observer.disconnect();
-    }, []);
-
-    return active;
-}
+import { useActiveSection, sections } from "../hook/useActiveSection";
 
 function Navigation({ onNavigate, active }) {
     return <ul className="nav-ul">
@@ -53,15 +22,15 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const active = useActiveSection();
 
-    return <div className="fixed inset-x-0 z-40 w-full backdrop-blur-lg border-b border-cream/10" style={{backgroundColor: "var(--color-maroon)"}}>
+    return <div className="fixed inset-x-0 z-40 w-full backdrop-blur-lg border-b border-mist/10" style={{backgroundColor: "rgba(21,10,8,0.85)"}}>
         <div className="mx-auto c-space max-w-7xl">
-            <div className="flex items-center justify-between py-2.5 sm:py-3">
+            <div className="flex items-center justify-between py-3 sm:py-3.5">
                 <a
                 href="/"
-                className="flex flex-col justify-center border border-cream/25 px-3 py-1.5 leading-tight transition-colors hover:border-sand/60 group"
+                className="group flex items-center gap-2.5 font-display text-lg sm:text-xl font-semibold tracking-tight text-mist transition-colors hover:text-ember"
                 >
-                    <span className="font-display text-base sm:text-lg font-semibold tracking-tight text-cream group-hover:text-sand transition-colors">Selim Coskunuzer</span>
-                    <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-cream/55">ML Engineer &mdash; Texas A&amp;M</span>
+                    <span className="w-2 h-2 rounded-full bg-ember shrink-0" />
+                    Selim Coskunuzer
                 </a>
                 <button
                     onClick={() => setIsOpen(!isOpen)}
@@ -77,7 +46,7 @@ const Navbar = () => {
                 <nav className="hidden sm:flex"><Navigation active={active} /></nav>
             </div>
         </div>
-        {isOpen && (<motion.div className="block overflow-hidden text-center sm:hidden border-t border-cream/10" initial={{ opacity: 0, x:-10}} animate={{ opacity: 1, x:0}} style={{ maxHeight: "100vh"}} transition={{ duration: 1}}>
+        {isOpen && (<motion.div className="block overflow-hidden text-center sm:hidden border-t border-mist/10" initial={{ opacity: 0, x:-10}} animate={{ opacity: 1, x:0}} style={{ maxHeight: "100vh"}} transition={{ duration: 1}}>
             <nav className="pb-5">
                 <Navigation onNavigate={() => setIsOpen(false)} active={active} />
             </nav>

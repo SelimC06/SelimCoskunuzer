@@ -5,12 +5,12 @@ import About from './sections/About';
 import Experiences from './sections/Experiences';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
-import SheetFrame from './components/SheetFrame';
+import NetworkSpine from './components/NetworkSpine';
 
 const App = () => {
   return (
     <>
-      <SheetFrame />
+      <NetworkSpine />
       <div className='container mx-auto max-w-7xl'>
         <Navbar />
         <Hero />

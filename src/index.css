@@ -1,21 +1,32 @@
 @import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 @theme {
-  /* Canvas */
-  --color-cream: #f7f3e3;
-  --color-paper: #fffdf7;
+  /* Deep canvas — near-black with a whisper of maroon, not flat #000 */
+  --color-void: #150a08;
+  --color-void-deep: #0a0403;
+  --color-surface: #241110;
 
-  /* Brand maroon, drawn from the Aggie maroon already used across the site */
+  /* Brand maroon, kept as a structural color rather than the dominant one */
   --color-maroon: #6f1a07;
   --color-maroon-dark: #431006;
 
-  /* Accent + secondary, sampled from the hero car's own materials */
-  --color-rust: #c1531f;
+  /* Ember glow accent — the network's activation color */
+  --color-ember: #f0904a;
+  --color-ember-dim: #b85f27;
+
+  /* Sand, sampled from the hero car's own connector-line material */
   --color-sand: #d2b48c;
 
-  /* Single consolidated text color (previously two mismatched grays) */
+  /* Warm light text, and its muted counterpart */
+  --color-mist: #f4ece0;
+  --color-mist-soft: #a89c8d;
+
+  /* Legacy names kept where still referenced */
+  --color-cream: #f7f3e3;
+  --color-paper: #fffdf7;
   --color-ink: #33303a;
   --color-ink-soft: #6b6670;
+  --color-rust: #c1531f;
 
   --font-display: "Space Grotesk", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
@@ -52,29 +63,26 @@
       transform: translateY(calc(-100% - var(--gap)));
     }
   }
+
+  @keyframes pulse-node {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(240, 144, 74, 0.5); }
+    50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(240, 144, 74, 0); }
+  }
 }
 @layer utilities {
-  /* soft blurred glow (not an offset outline) so it reads cleanly at any scale
-     over the transparent 3D canvas behind these sections */
-  .text-outline-black {
-    text-shadow: 0 0 3px #000, 0 0 6px #000, 0 0 10px #000;
-  }
-
-  .text-outline-white {
-    text-shadow:
-      0 0 3px #fff, 0 0 3px #fff, 0 0 3px #fff,
-      0 0 6px #fff, 0 0 6px #fff,
-      0 0 10px #fff;
+  /* Soft dark glow for light text — depth against the car's brighter highlights,
+     much lighter touch than a light-on-cream theme needs since light text on a
+     dark canvas already has contrast almost everywhere on its own. */
+  .text-glow {
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.7), 0 1px 4px rgba(0, 0, 0, 0.8);
   }
 }
 body {
-  background-color: var(--color-cream);
-  background-image:
-    linear-gradient(rgba(111, 26, 7, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(111, 26, 7, 0.05) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-color: var(--color-void);
+  background-image: radial-gradient(rgba(244, 236, 224, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
   font-family: "Funnel Display", sans-serif;
-  color: var(--color-ink);
+  color: var(--color-mist);
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
@@ -100,22 +108,24 @@ html {
   @apply font-display font-bold text-3xl md:text-4xl tracking-tight;
 }
 
-/* Schematic "figure caption" used as a section kicker — the numbering is real:
-   it's this document's own figure/section order, like a caption in a technical drawing. */
-.fig-label {
-  @apply font-mono uppercase text-xs tracking-[0.2em] font-medium inline-flex items-center gap-2;
+/* Node-style section kicker — a small pulsing dot instead of a static label,
+   since every section on this page is framed as a node in the graph. */
+.node-label {
+  @apply font-mono uppercase text-xs tracking-[0.25em] font-medium inline-flex items-center gap-2.5;
 }
 
-.fig-label::before {
+.node-label::before {
   content: "";
-  width: 18px;
-  height: 1px;
-  background: currentColor;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--color-ember);
   flex-shrink: 0;
+  animation: pulse-node 2.4s ease-in-out infinite;
 }
 
-/* Registration-mark corners, borrowed from technical drawings/print crop marks.
-   Used consistently on framed photos/panels as this design's signature device. */
+/* Corner-bracket frame — reads as camera-focus/targeting brackets on a dark
+   HUD, used on framed photos as this design's signature scan-frame device. */
 .reg-marks {
   position: relative;
 }
@@ -126,37 +136,37 @@ html {
 .reg-marks .reg-bl {
   content: "";
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   pointer-events: none;
 }
 
 .reg-marks::before {
-  top: -6px;
-  left: -6px;
-  border-top: 2px solid var(--color-sand);
-  border-left: 2px solid var(--color-sand);
+  top: -7px;
+  left: -7px;
+  border-top: 2px solid var(--color-ember);
+  border-left: 2px solid var(--color-ember);
 }
 
 .reg-marks::after {
-  bottom: -6px;
-  right: -6px;
-  border-bottom: 2px solid var(--color-sand);
-  border-right: 2px solid var(--color-sand);
+  bottom: -7px;
+  right: -7px;
+  border-bottom: 2px solid var(--color-ember);
+  border-right: 2px solid var(--color-ember);
 }
 
 .reg-marks .reg-tr {
-  top: -6px;
-  right: -6px;
-  border-top: 2px solid var(--color-sand);
-  border-right: 2px solid var(--color-sand);
+  top: -7px;
+  right: -7px;
+  border-top: 2px solid var(--color-ember);
+  border-right: 2px solid var(--color-ember);
 }
 
 .reg-marks .reg-bl {
-  bottom: -6px;
-  left: -6px;
-  border-bottom: 2px solid var(--color-sand);
-  border-left: 2px solid var(--color-sand);
+  bottom: -7px;
+  left: -7px;
+  border-bottom: 2px solid var(--color-ember);
+  border-left: 2px solid var(--color-ember);
 }
 
 /* Navigation */
@@ -169,14 +179,14 @@ html {
 }
 
 .nav-link {
-  @apply relative text-lg md:text-sm md:font-medium md:tracking-wide md:uppercase transition-colors text-cream/80 hover:text-cream;
+  @apply relative text-lg md:text-sm md:font-medium md:tracking-wide md:uppercase transition-colors text-mist-soft hover:text-mist;
 }
 
 .nav-link.is-active {
-  @apply text-cream;
+  @apply text-ember;
 }
 
-/* underline that grows in from the left on hover/active, echoes the timeline's edge line */
+/* underline that grows in from the left on hover/active */
 .nav-link::after {
   content: "";
   position: absolute;
@@ -184,7 +194,7 @@ html {
   right: 100%;
   bottom: -4px;
   height: 2px;
-  background: var(--color-sand);
+  background: var(--color-ember);
   transition: right 0.25s ease;
 }
 
@@ -195,13 +205,13 @@ html {
 
 /* Contact Section*/
 .field-label {
-  @apply font-mono text-xs uppercase tracking-[0.15em] text-cream/70 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  @apply font-mono text-xs uppercase tracking-[0.15em] text-mist-soft leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
 }
 
 .field-input {
-  @apply w-full min-h-10 rounded-md px-3 py-2 text-sm bg-cream/10 text-cream transition duration-200 placeholder-cream/40 border border-cream/15 mt-2;
+  @apply w-full min-h-10 rounded-md px-3 py-2 text-sm bg-void-deep/60 text-mist transition duration-200 placeholder-mist-soft/50 border border-mist/10 mt-2;
 }
 
 .field-input-focus {
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sand/60 focus-visible:border-sand/60;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ember/50 focus-visible:border-ember/60;
 }
