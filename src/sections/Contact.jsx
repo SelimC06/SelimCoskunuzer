@@ -65,8 +65,10 @@ const Contact = () => {
 
         <div className="flex flex-col items-start justify-center w-full max-w-md border border-cream/10 rounded-2xl bg-[rgba(111,26,7,0.9)] p-6 lg:ml-auto lg:mt-9 shadow-2xl">
             <div className="flex flex-col items-start w-full gap-3 mb-5">
-                <p className="node-label text-sand">Node 04 &mdash; Contact</p>
-                <h2 className="text-heading text-cream">Contact</h2>
+                <div id="contact-heading-block">
+                    <p className="node-label text-sand mb-3">Node 04 &mdash; Contact</p>
+                    <h2 className="text-heading text-cream">Contact</h2>
+                </div>
                 <p className="text-cream/85 leading-relaxed">Whether you're looking to build a new website, improve your existing platform, or bring a unique project to life, I'm here to help.</p>
             </div>
             <form className="w-full" onSubmit={handleSubmit}>

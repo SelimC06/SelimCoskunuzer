@@ -3,8 +3,10 @@ import RegMarks from "../components/RegMarks";
 const About = () => {
     return (
         <section id="about" className="c-space section-spacing pt-20">
-            <p className="node-label text-ember mb-3">Node 02 &mdash; About</p>
-            <h2 className="text-heading text-maroon text-glow mb-8">About Me</h2>
+            <div id="about-heading-block">
+                <p className="node-label text-ember mb-3">Node 02 &mdash; About</p>
+                <h2 className="text-heading text-maroon text-glow mb-8">About Me</h2>
+            </div>
             <div className="flex flex-col lg:flex-row gap-10 items-start">
                 <div className="flex-1">
             <p className="mt-6 text-base md:text-lg max-w-3xl leading-relaxed font-semibold text-ink text-glow">

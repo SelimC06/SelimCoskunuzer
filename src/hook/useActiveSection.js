@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 
+// `centerTargetId` is the element each section's spine node scrolls to and
+// vertically centers (instead of jumping to the section's top edge). Home is
+// left with plain top-of-page anchor behavior. Every other target is a
+// same-sized "label + heading" block so centering each one independently
+// lands the heading at the same viewport position across sections.
 export const sections = [
     { id: "home", label: "Home" },
-    { id: "about", label: "About" },
-    { id: "Experience", label: "Experience" },
-    { id: "contact", label: "Contact" },
+    { id: "about", label: "About", centerTargetId: "about-heading-block" },
+    { id: "Experience", label: "Experience", centerTargetId: "experience-heading-block" },
+    { id: "contact", label: "Contact", centerTargetId: "contact-heading-block" },
 ];
 
 export function useActiveSection() {

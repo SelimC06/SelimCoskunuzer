@@ -22,8 +22,10 @@ export const Timeline = ({ data }) => {
 
     return (
         <div className="c-space pt-10 pb-4 md:pb-6" ref={containerRef}>
-            <p className="node-label text-ember relative md:top-4">Node 03 &mdash; Experience</p>
-            <h2 className="text-heading text-ink text-glow relative md:top-4 mt-3">My Work Experience</h2>
+            <div id="experience-heading-block">
+                <p className="node-label text-ember relative md:top-4">Node 03 &mdash; Experience</p>
+                <h2 className="text-heading text-ink text-glow relative md:top-4 mt-3">My Work Experience</h2>
+            </div>
             <div ref={ref} className="relative pb-10 mt-6">
                 {data.map((item) => (
                     <div key={`${item.title}-${item.date}`} className="relative flex items-start pt-6 md:pt-16">

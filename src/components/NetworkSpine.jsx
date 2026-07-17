@@ -8,6 +8,12 @@ const NetworkSpine = () => {
     const active = useActiveSection();
     const activeIndex = sections.findIndex((s) => s.id === active);
 
+    const handleClick = (e, s) => {
+        if (!s.centerTargetId) return; // home keeps the plain top-of-page jump
+        e.preventDefault();
+        document.getElementById(s.centerTargetId)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    };
+
     return (
         <div className="fixed left-6 xl:left-8 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col items-center">
             {sections.map((s, i) => (
@@ -15,6 +21,7 @@ const NetworkSpine = () => {
                     <a
                         href={`#${s.id}`}
                         aria-label={s.label}
+                        onClick={(e) => handleClick(e, s)}
                         className="group relative flex items-center justify-center w-4 h-4"
                     >
                         <span
