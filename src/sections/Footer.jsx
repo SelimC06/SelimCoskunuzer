@@ -13,10 +13,10 @@ const iconStyle = (src) => ({
 
 const Footer = () => {
     return (
-        <section className="font-mono flex flex-wrap items-center justify-between pb-3 text-xs uppercase tracking-wide text-mist-soft c-space">
+        <section className="font-mono flex flex-wrap items-center justify-between pb-3 text-xs uppercase tracking-wide text-maroon/80 c-space">
             <div className="mb-4 flex items-center gap-3 w-full">
-                <span className="text-mist-soft/70 shrink-0">4 Nodes Linked</span>
-                <div className="bg-linear-to-r from-mist/20 via-mist/20 to-transparent h-px flex-1"/>
+                <span className="text-maroon/60 shrink-0">4 Nodes Linked</span>
+                <div className="bg-linear-to-r from-maroon/60 via-maroon/60 to-transparent h-px flex-1"/>
             </div>
             <div className="flex gap-2">
                 <p>Terms &amp; Conditions</p>
@@ -25,7 +25,7 @@ const Footer = () => {
             </div>
             <div className="flex gap-4">
                 {mySocials.map((social, index)=>(
-                    <a href={social.href} key={index} aria-label={social.name} className="text-mist-soft hover:text-ember transition-colors">
+                    <a href={social.href} key={index} aria-label={social.name} className="text-maroon/70 hover:text-ember transition-colors">
                         <span
                             style={iconStyle(social.icon)}
                             className="block w-5 h-5 bg-current"

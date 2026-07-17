@@ -21,18 +21,18 @@ const NetworkSpine = () => {
                             className={`w-2.5 h-2.5 rounded-full border transition-colors duration-300 ${
                                 i <= activeIndex
                                     ? "bg-ember border-ember"
-                                    : "bg-transparent border-mist/25"
+                                    : "bg-transparent border-maroon/30"
                             }`}
                         />
                         {i === activeIndex && (
                             <span className="absolute w-2.5 h-2.5 rounded-full bg-ember/50 animate-ping" />
                         )}
-                        <span className="absolute left-6 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.2em] text-mist-soft opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                        <span className="absolute left-6 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                             {s.label}
                         </span>
                     </a>
                     {i < sections.length - 1 && (
-                        <div className="w-px h-12 bg-mist/15 relative overflow-hidden">
+                        <div className="w-px h-12 bg-maroon/15 relative overflow-hidden">
                             <div
                                 className={`absolute inset-x-0 top-0 bg-ember transition-all duration-500 ${
                                     i < activeIndex ? "h-full" : "h-0"

@@ -13,7 +13,7 @@ const HeroText = () => {
             initial="hidden"
             animate="visible"
             transition={{delay:1.6}}>Node 01 &mdash; Profile</motion.p>
-            <motion.h1 className="font-display text-7xl font-bold text-mist tracking-tight text-glow"
+            <motion.h1 className="font-display text-7xl font-bold text-maroon tracking-tight text-glow"
             variants={variants}
             initial="hidden"
             animate="visible"
@@ -24,7 +24,7 @@ const HeroText = () => {
                 initial="hidden"
                 animate="visible"
                 transition={{delay:2}}>Machine Learning Engineer</motion.p>
-                <motion.p className="font-mono text-sm tracking-[0.2em] uppercase text-mist-soft"
+                <motion.p className="font-mono text-sm tracking-[0.2em] uppercase text-ink-soft"
                 variants={variants}
                 initial="hidden"
                 animate="visible"
@@ -37,7 +37,7 @@ const HeroText = () => {
             initial="hidden"
             animate="visible"
             transition={{delay:.6}}>Node 01 &mdash; Profile</motion.p>
-            <motion.p className="font-display text-4xl font-bold text-mist tracking-tight text-glow"
+            <motion.p className="font-display text-4xl font-bold text-maroon tracking-tight text-glow"
             variants={variants}
             initial="hidden"
             animate="visible"
@@ -50,7 +50,7 @@ const HeroText = () => {
                 transition={{delay:1}}>
                     Machine Learning Engineer
                 </motion.p>
-                <motion.p className="font-mono text-xs tracking-[0.2em] uppercase text-mist-soft"
+                <motion.p className="font-mono text-xs tracking-[0.2em] uppercase text-ink-soft"
                 variants={variants}
                 initial="hidden"
                 animate="visible"

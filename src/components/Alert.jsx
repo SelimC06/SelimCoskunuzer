@@ -16,12 +16,12 @@ const Alert = ({ type, text }) => {
     >
       <div
         className={`p-2 ${
-          type === "danger" ? "bg-red-900" : "bg-surface"
-        } items-center text-mist leading-none lg:rounded-full flex lg:inline-flex rounded-md p-5 shadow-2xl border border-mist/10`}
+          type === "danger" ? "bg-red-800" : "bg-maroon"
+        } items-center text-cream leading-none lg:rounded-full flex lg:inline-flex rounded-md p-5 shadow-2xl border border-cream/10`}
       >
         <p
           className={`flex rounded-full font-mono ${
-            type === "danger" ? "bg-red-500" : "bg-ember text-void-deep"
+            type === "danger" ? "bg-red-500" : "bg-sand text-maroon-dark"
           } uppercase px-2 py-1 text-xs font-semibold mr-3`}
         >
           {type === "danger" ? "Failed" : "Success"}

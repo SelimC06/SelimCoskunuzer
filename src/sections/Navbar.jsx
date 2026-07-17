@@ -22,14 +22,14 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const active = useActiveSection();
 
-    return <div className="fixed inset-x-0 z-40 w-full backdrop-blur-lg border-b border-mist/10" style={{backgroundColor: "rgba(21,10,8,0.85)"}}>
+    return <div className="fixed inset-x-0 z-40 w-full backdrop-blur-lg border-b border-cream/10" style={{backgroundColor: "var(--color-maroon)"}}>
         <div className="mx-auto c-space max-w-7xl">
             <div className="flex items-center justify-between py-3 sm:py-3.5">
                 <a
                 href="/"
-                className="group flex items-center gap-2.5 font-display text-lg sm:text-xl font-semibold tracking-tight text-mist transition-colors hover:text-ember"
+                className="group flex items-center gap-2.5 font-display text-lg sm:text-xl font-semibold tracking-tight text-cream transition-colors hover:text-sand"
                 >
-                    <span className="w-2 h-2 rounded-full bg-ember shrink-0" />
+                    <span className="w-2 h-2 rounded-full bg-sand shrink-0" />
                     Selim Coskunuzer
                 </a>
                 <button
@@ -46,7 +46,7 @@ const Navbar = () => {
                 <nav className="hidden sm:flex"><Navigation active={active} /></nav>
             </div>
         </div>
-        {isOpen && (<motion.div className="block overflow-hidden text-center sm:hidden border-t border-mist/10" initial={{ opacity: 0, x:-10}} animate={{ opacity: 1, x:0}} style={{ maxHeight: "100vh"}} transition={{ duration: 1}}>
+        {isOpen && (<motion.div className="block overflow-hidden text-center sm:hidden border-t border-cream/10" initial={{ opacity: 0, x:-10}} animate={{ opacity: 1, x:0}} style={{ maxHeight: "100vh"}} transition={{ duration: 1}}>
             <nav className="pb-5">
                 <Navigation onNavigate={() => setIsOpen(false)} active={active} />
             </nav>

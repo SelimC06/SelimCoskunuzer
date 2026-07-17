@@ -63,11 +63,11 @@ const Contact = () => {
         </div>
         </div>
 
-        <div className="flex flex-col items-start justify-center w-full max-w-md border border-mist/10 rounded-2xl bg-surface/90 backdrop-blur-sm p-6 lg:ml-auto lg:mt-9 shadow-2xl">
+        <div className="flex flex-col items-start justify-center w-full max-w-md border border-cream/10 rounded-2xl bg-[rgba(111,26,7,0.9)] p-6 lg:ml-auto lg:mt-9 shadow-2xl">
             <div className="flex flex-col items-start w-full gap-3 mb-5">
-                <p className="node-label text-ember">Node 04 &mdash; Contact</p>
-                <h2 className="text-heading text-mist text-glow">Contact</h2>
-                <p className="text-mist-soft leading-relaxed">Whether you're looking to build a new website, improve your existing platform, or bring a unique project to life, I'm here to help.</p>
+                <p className="node-label text-sand">Node 04 &mdash; Contact</p>
+                <h2 className="text-heading text-cream">Contact</h2>
+                <p className="text-cream/85 leading-relaxed">Whether you're looking to build a new website, improve your existing platform, or bring a unique project to life, I'm here to help.</p>
             </div>
             <form className="w-full" onSubmit={handleSubmit}>
             <div className="mb-3">
@@ -82,7 +82,7 @@ const Contact = () => {
                 <label htmlFor="message" className="field-label">Message</label>
                 <textarea id="message" name="message" type='text' className="field-input field-input-focus" rows="4" placeholder="Share your thoughts..." autoComplete="message" value={formData.message} onChange={handleChange} required />
             </div>
-            <button type="submit" disabled={isLoading} className="w-full px-1 py-3 font-mono text-sm uppercase tracking-[0.15em] text-center rounded-md cursor-pointer bg-ember text-void-deep font-semibold hover:bg-mist transition-colors hover-animation disabled:opacity-60 disabled:cursor-not-allowed">{!isLoading ? "Send" : "Sending"}</button>
+            <button type="submit" disabled={isLoading} className="w-full px-1 py-3 font-mono text-sm uppercase tracking-[0.15em] text-center rounded-md cursor-pointer bg-sand text-maroon-dark font-semibold hover:bg-cream transition-colors hover-animation disabled:opacity-60 disabled:cursor-not-allowed">{!isLoading ? "Send" : "Sending"}</button>
         </form>
         </div>
     </section>
