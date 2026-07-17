@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence } from "motion/react";
 import emailjs from "@emailjs/browser"
 import Alert from "../components/Alert"
+import RegMarks from "../components/RegMarks"
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -52,7 +53,8 @@ const Contact = () => {
         </AnimatePresence>
         {/* LEFT IMAGE */}
         <div className="flex-1 flex justify-center lg:justify-end pr-6 lg:pr-10">
-        <div className="w-full max-w-2xl rounded-3xl border-4 border-maroon shadow-lg overflow-hidden">
+        <div className="reg-marks w-full max-w-2xl rounded-3xl border-4 border-maroon shadow-lg overflow-hidden">
+            <RegMarks />
             <img
             src="/assets/contact_image.jpg"
             alt="About me"
@@ -63,7 +65,7 @@ const Contact = () => {
 
         <div className="flex flex-col items-start justify-center w-full max-w-md border border-cream/10 rounded-2xl bg-[rgba(111,26,7,0.9)] p-6 lg:ml-auto lg:mt-9">
             <div className="flex flex-col items-start w-full gap-3 mb-5">
-                <p className="font-mono text-xs uppercase tracking-[0.2em] text-sand">Get in touch</p>
+                <p className="fig-label text-sand">Fig. 04 &mdash; Contact</p>
                 <h2 className="text-heading text-cream">Contact</h2>
                 <p className="text-cream/85 leading-relaxed">Whether you're looking to build a new website, improve your existing platform, or bring a unique project to life, I'm here to help.</p>
             </div>

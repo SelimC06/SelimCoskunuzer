@@ -5,17 +5,21 @@ import About from './sections/About';
 import Experiences from './sections/Experiences';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
+import SheetFrame from './components/SheetFrame';
 
 const App = () => {
   return (
-    <div className='container mx-auto max-w-7xl'>
-      <Navbar />
-      <Hero />
-      <About />
-      <Experiences />
-      <Contact />
-      <Footer />
-    </div>
+    <>
+      <SheetFrame />
+      <div className='container mx-auto max-w-7xl'>
+        <Navbar />
+        <Hero />
+        <About />
+        <Experiences />
+        <Contact />
+        <Footer />
+      </div>
+    </>
   )
 }
 

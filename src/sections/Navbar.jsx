@@ -53,14 +53,15 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const active = useActiveSection();
 
-    return <div className="fixed inset-x-0 z-20 w-full backdrop-blur-lg border-b border-cream/10" style={{backgroundColor: "var(--color-maroon)"}}>
+    return <div className="fixed inset-x-0 z-40 w-full backdrop-blur-lg border-b border-cream/10" style={{backgroundColor: "var(--color-maroon)"}}>
         <div className="mx-auto c-space max-w-7xl">
-            <div className="flex items-center justify-between py-3 sm:py-4">
+            <div className="flex items-center justify-between py-2.5 sm:py-3">
                 <a
                 href="/"
-                className="font-display text-xl font-semibold tracking-tight transition-colors text-cream hover:text-sand"
+                className="flex flex-col justify-center border border-cream/25 px-3 py-1.5 leading-tight transition-colors hover:border-sand/60 group"
                 >
-                    Selim Coskunuzer
+                    <span className="font-display text-base sm:text-lg font-semibold tracking-tight text-cream group-hover:text-sand transition-colors">Selim Coskunuzer</span>
+                    <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.15em] uppercase text-cream/55">ML Engineer &mdash; Texas A&amp;M</span>
                 </a>
                 <button
                     onClick={() => setIsOpen(!isOpen)}

@@ -68,7 +68,11 @@
   }
 }
 body {
-  background: var(--color-cream);
+  background-color: var(--color-cream);
+  background-image:
+    linear-gradient(rgba(111, 26, 7, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111, 26, 7, 0.05) 1px, transparent 1px);
+  background-size: 36px 36px;
   font-family: "Funnel Display", sans-serif;
   color: var(--color-ink);
   scroll-behavior: smooth;
@@ -96,9 +100,63 @@ html {
   @apply font-display font-bold text-3xl md:text-4xl tracking-tight;
 }
 
-/* Small tracked mono label used as a section kicker ("EXPERIENCE", "CONTACT") */
-.eyebrow {
-  @apply font-mono uppercase text-xs tracking-[0.2em] text-rust font-medium;
+/* Schematic "figure caption" used as a section kicker — the numbering is real:
+   it's this document's own figure/section order, like a caption in a technical drawing. */
+.fig-label {
+  @apply font-mono uppercase text-xs tracking-[0.2em] font-medium inline-flex items-center gap-2;
+}
+
+.fig-label::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* Registration-mark corners, borrowed from technical drawings/print crop marks.
+   Used consistently on framed photos/panels as this design's signature device. */
+.reg-marks {
+  position: relative;
+}
+
+.reg-marks::before,
+.reg-marks::after,
+.reg-marks .reg-tr,
+.reg-marks .reg-bl {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+}
+
+.reg-marks::before {
+  top: -6px;
+  left: -6px;
+  border-top: 2px solid var(--color-sand);
+  border-left: 2px solid var(--color-sand);
+}
+
+.reg-marks::after {
+  bottom: -6px;
+  right: -6px;
+  border-bottom: 2px solid var(--color-sand);
+  border-right: 2px solid var(--color-sand);
+}
+
+.reg-marks .reg-tr {
+  top: -6px;
+  right: -6px;
+  border-top: 2px solid var(--color-sand);
+  border-right: 2px solid var(--color-sand);
+}
+
+.reg-marks .reg-bl {
+  bottom: -6px;
+  left: -6px;
+  border-bottom: 2px solid var(--color-sand);
+  border-left: 2px solid var(--color-sand);
 }
 
 /* Navigation */

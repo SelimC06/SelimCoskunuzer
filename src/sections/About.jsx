@@ -1,6 +1,9 @@
+import RegMarks from "../components/RegMarks";
+
 const About = () => {
     return (
         <section id="about" className="c-space section-spacing pt-20">
+            <p className="fig-label text-rust mb-3">Fig. 02 &mdash; About</p>
             <h2 className="text-heading text-ink text-outline-white mb-8">About Me</h2>
             <div className="flex flex-col lg:flex-row gap-10 items-start">
                 <div className="flex-1">
@@ -53,9 +56,8 @@ const About = () => {
 
             </div>
             <div className="flex-1 flex justify-center lg:justify-end">
-                <div className="relative">
-                    <div className="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-sand" />
-                    <div className="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-sand" />
+                <div className="reg-marks">
+                    <RegMarks />
                     <img
                         src="/assets/me.jpg"
                         alt="About me"

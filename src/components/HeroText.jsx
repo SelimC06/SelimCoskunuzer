@@ -8,6 +8,11 @@ const variants = {
 const HeroText = () => {
     return <div className="z-10 mt-20 text-center md:mt-40 md:text-left">
         <div className="flex-col hidden md:flex c-space">
+            <motion.p className="fig-label text-rust mb-3"
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            transition={{delay:1.6}}>Fig. 01 &mdash; Profile</motion.p>
             <motion.h1 className="font-display text-7xl font-bold text-maroon tracking-tight"
             variants={variants}
             initial="hidden"
@@ -27,6 +32,11 @@ const HeroText = () => {
             </div>
         </div>
         <div className="flex flex-col space-y-5 md:hidden">
+            <motion.p className="fig-label text-rust justify-center"
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            transition={{delay:.6}}>Fig. 01 &mdash; Profile</motion.p>
             <motion.p className="font-display text-4xl font-bold text-maroon tracking-tight"
             variants={variants}
             initial="hidden"
