@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { AnimatePresence } from "motion/react";
 import emailjs from "@emailjs/browser"
-import { form } from "motion/react-client";
 import Alert from "../components/Alert"
 
 const Contact = () => {
@@ -28,7 +28,6 @@ const Contact = () => {
         e.preventDefault();
         setIsLoading(true);
         try{
-            console.log("Form submitted:", formData)
             await emailjs.send("service_6osa0eb", "template_6c8cas9",{
                 from_name: formData.name,
                 to_name: "Selim",
@@ -48,10 +47,12 @@ const Contact = () => {
         // template_6c8cas9
     };
     return <section id="contact" className="relative flex items-center justify-end c-space pt-4 md:pt-6 pb-6 md:pb-8">
-        {showAlert && <Alert type={alertType} text={alertMessage}/>}
+        <AnimatePresence>
+            {showAlert && <Alert key="alert" type={alertType} text={alertMessage}/>}
+        </AnimatePresence>
         {/* LEFT IMAGE */}
         <div className="flex-1 flex justify-center lg:justify-end pr-6 lg:pr-10">
-        <div className="w-full max-w-2xl rounded-3xl border-[6px] border-[rgba(111,26,7,0.9)] shadow-lg overflow-hidden">
+        <div className="w-full max-w-2xl rounded-3xl border-4 border-maroon shadow-lg overflow-hidden">
             <img
             src="/assets/contact_image.jpg"
             alt="About me"
@@ -60,27 +61,26 @@ const Contact = () => {
         </div>
         </div>
 
-
-
-        <div className="flex flex-col items-start justify-center w-full max-w-md border border-white/10 rounded-2xl bg-[rgba(111,26,7,0.9)] p-5 lg:ml-auto lg:mt-9">
-            <div className="flex flex-col items-start w-full gap-5 mb-4 text-white text-outline-black">
-                <h2 className="text-heading">Contact</h2>
-                <p>Whether you're looking to build a new website, improve your existing platform, or bring a unique project to life, I'm here to help </p>
+        <div className="flex flex-col items-start justify-center w-full max-w-md border border-cream/10 rounded-2xl bg-[rgba(111,26,7,0.9)] p-6 lg:ml-auto lg:mt-9">
+            <div className="flex flex-col items-start w-full gap-3 mb-5">
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-sand">Get in touch</p>
+                <h2 className="text-heading text-cream">Contact</h2>
+                <p className="text-cream/85 leading-relaxed">Whether you're looking to build a new website, improve your existing platform, or bring a unique project to life, I'm here to help.</p>
             </div>
             <form className="w-full" onSubmit={handleSubmit}>
             <div className="mb-3">
-                <label htmlFor="name" className="feild-label">Full Name</label>
+                <label htmlFor="name" className="field-label">Full Name</label>
                 <input id="name" name="name" type='text' className="field-input field-input-focus" placeholder="John Doe" autoComplete="name" value={formData.name} onChange={handleChange} required />
             </div>
             <div className="mb-3">
-                <label htmlFor="email" className="feild-label">Email</label>
+                <label htmlFor="email" className="field-label">Email</label>
                 <input id="email" name="email" type='email' className="field-input field-input-focus" placeholder="JohnDoe@email.com" autoComplete="email" value={formData.email} onChange={handleChange} required />
             </div>
-            <div className="mb-3">
-                <label htmlFor="message" className="feild-label">Message</label>
+            <div className="mb-4">
+                <label htmlFor="message" className="field-label">Message</label>
                 <textarea id="message" name="message" type='text' className="field-input field-input-focus" rows="4" placeholder="Share your thoughts..." autoComplete="message" value={formData.message} onChange={handleChange} required />
             </div>
-            <button type="submit" className="w-full px-1 py-3 text-lg text-center rounded-md cursor-pointer bg-radial from-lavender to-royal hover-animation">{!isLoading ? "Send" : "Sending"}</button>
+            <button type="submit" disabled={isLoading} className="w-full px-1 py-3 font-mono text-sm uppercase tracking-[0.15em] text-center rounded-md cursor-pointer bg-sand text-maroon-dark font-semibold hover:bg-cream transition-colors hover-animation disabled:opacity-60 disabled:cursor-not-allowed">{!isLoading ? "Send" : "Sending"}</button>
         </form>
         </div>
     </section>

@@ -1,67 +1,51 @@
 import {motion} from "motion/react";
 
+const variants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: { opacity: 1, x: 0 },
+};
+
 const HeroText = () => {
-    const variants ={
-        hidden:{opacity:0, x:-50},
-        visible: {opacity:1, x:0},
-    }
-    return <div className="z-10
-    mt-20 text-center md:mt-40 md:text-left rounded-3xl bg-clip-text">
+    return <div className="z-10 mt-20 text-center md:mt-40 md:text-left">
         <div className="flex-col hidden md:flex c-space">
-            <motion.h1 className="text-5xl font-medium text-[rgba(179,182,183,1)]" 
+            <motion.h1 className="font-display text-7xl font-bold text-maroon tracking-tight"
             variants={variants}
             initial="hidden"
             animate="visible"
             transition={{delay:1.8}}>Selim Coskunuzer</motion.h1>
-            <div className="flex flex-col items-start">
-                <motion.p className="text-6xl font-medium text-[rgba(111,26,7,1)] text-outline-white"
+            <div className="flex flex-col items-start mt-4 gap-1">
+                <motion.p className="font-mono text-sm tracking-[0.2em] uppercase text-rust font-medium"
                 variants={variants}
                 initial="hidden"
                 animate="visible"
                 transition={{delay:2}}>Machine Learning Engineer</motion.p>
-                <div></div>
-                <motion.p className="text-5xl font-medium text-[rgba(179,182,183,1)]"
+                <motion.p className="font-mono text-sm tracking-[0.2em] uppercase text-ink-soft"
                 variants={variants}
                 initial="hidden"
                 animate="visible"
-                transition={{delay:2.2}}>Texas A&M University</motion.p>
-                <motion.a
-                href="#about"
-                className="mt-6 inline-flex items-center gap-3 rounded-full border border-white/30 bg-[rgba(111,26,7,1)] px-5 py-3 text-sm font-semibold text-white shadow-lg backdrop-blur-md hover:bg-[rgba(111,26,7,0.8)] transition"
-                variants={variants}
-                initial="hidden"
-                animate="visible"
-                transition={{delay:2.2}}
-                >
-                <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white/80 opacity-60" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
-                </span>
-                Scroll down
-                <span className="text-lg leading-none">↓</span>
-                </motion.a>
+                transition={{delay:2.2}}>Texas A&amp;M University</motion.p>
             </div>
         </div>
-        <div className="flex flex-col space-y-6 md:hidden">
-            <motion.p className="text-4xl font-medium text-[rgba(71,68,72,1)]"
+        <div className="flex flex-col space-y-5 md:hidden">
+            <motion.p className="font-display text-4xl font-bold text-maroon tracking-tight"
             variants={variants}
             initial="hidden"
             animate="visible"
             transition={{delay:.8}}>Selim Coskunuzer</motion.p>
-            <div>
-                <motion.p className="text-4xl font-black text-[rgba(71,68,72,1)]"
+            <div className="flex flex-col items-center gap-1">
+                <motion.p className="font-mono text-xs tracking-[0.2em] uppercase text-rust font-medium"
                 variants={variants}
                 initial="hidden"
                 animate="visible"
                 transition={{delay:1}}>
                     Machine Learning Engineer
                 </motion.p>
-                <motion.p className="text-3xl font-black text-[rgba(71,68,72,1)]"
+                <motion.p className="font-mono text-xs tracking-[0.2em] uppercase text-ink-soft"
                 variants={variants}
                 initial="hidden"
                 animate="visible"
                 transition={{delay:1.2}}>
-                    Texas A&M University
+                    Texas A&amp;M University
                 </motion.p>
             </div>
         </div>

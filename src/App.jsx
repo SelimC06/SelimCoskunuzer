@@ -14,7 +14,6 @@ const App = () => {
       <About />
       <Experiences />
       <Contact />
-      <section className='c-space section-spacing pt-20'></section>
       <Footer />
     </div>
   )

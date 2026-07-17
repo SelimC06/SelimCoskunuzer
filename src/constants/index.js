@@ -251,6 +251,7 @@ export const experiences = [
       "Built a molecular property prediction model with deep learning to analyze molecular structures as graphs.",
       "Designed data pipelines for SMILES parsing, feature extraction, and graph construction, cutting runtime by 20%.",
     ],
+    tags: ["PyTorch", "Graph Neural Networks", "Molecular ML", "Python"],
     artifact: {
       type: "pdf",
       whatIsIt: "Research Paper",
@@ -267,6 +268,7 @@ export const experiences = [
       "Developed educational content and examples for a tutorial website on topological machine learning.",
       "Guided deployment of a website making topological ML resources accessible to researchers.",
     ],
+    tags: ["PyTorch", "giotto-TDA", "NetworkX", "TensorFlow"],
     artifact: {
       type: "website",
       whatIsIt: "The Website",
@@ -282,6 +284,7 @@ export const experiences = [
       "Collaborated with Ph.D. researchers in the Statistical AI and Relational Learning Group (StARLing Lab).",
       "Led development of a machine learning model predicting NFL player salaries from 2K+ fantasy football records.",
     ],
+    tags: ["Jupyter Notebook", "Matplotlib,", "scikit-learn", "RF"],
     artifact: {
       type: "website",
       whatIsIt: "Code",
