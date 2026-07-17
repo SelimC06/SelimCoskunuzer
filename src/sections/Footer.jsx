@@ -13,8 +13,16 @@ const iconStyle = (src) => ({
 
 const Footer = () => {
     return (
-        <>
-        <section className="font-mono flex flex-wrap items-center justify-between pb-3 text-xs uppercase tracking-wide text-maroon/80 c-space">
+        <section
+            className="font-mono flex flex-wrap items-center justify-between pb-3 text-xs uppercase tracking-wide text-maroon/80 c-space"
+            style={{ paddingTop: "max(0px, calc(50vh - 330px))" }}
+            // The extra top padding is scroll headroom for the Contact spine
+            // node: the browser can't scroll past the page's natural end, and
+            // without this Contact couldn't reach the same landing position
+            // as About/Experience. It goes ABOVE the footer (not after it) so
+            // the footer itself stays flush with the true bottom of the page
+            // instead of floating over empty space when scrolled all the way down.
+        >
             <div className="mb-4 flex items-center gap-3 w-full">
                 <span className="text-maroon/60 shrink-0">4 Nodes Linked</span>
                 <div className="bg-linear-to-r from-maroon/60 via-maroon/60 to-transparent h-px flex-1"/>
@@ -36,12 +44,6 @@ const Footer = () => {
             </div>
             <p>&copy; 2026 Selim. All rights reserved</p>
         </section>
-        {/* scroll headroom so the Contact spine node can reach the same landing
-            position as About/Experience even though this is the last section —
-            without it, the browser physically can't scroll further than the
-            page's natural end. Sized in vh so it scales with viewport height. */}
-        <div className="min-h-[35vh]" aria-hidden="true" />
-        </>
     )
 }
 
