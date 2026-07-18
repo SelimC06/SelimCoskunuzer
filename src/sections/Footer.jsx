@@ -17,12 +17,11 @@ const Footer = () => {
             id="site-footer"
             className="font-mono flex flex-wrap items-center justify-between pb-3 text-xs uppercase tracking-wide text-maroon/80 c-space"
             style={{ paddingTop: "max(0px, calc(100vh - 700px))" }}
-            // Scroll headroom for the Contact spine node's floor constraints
-            // (never show Experience's tail end above Contact, never cut off
-            // the footer's own content) — the page's natural end alone isn't
-            // tall enough to reach that reliably at typical viewport heights.
-            // Sits above the footer's own content, not after it, so the
-            // footer stays as close to the true bottom of the page as this allows.
+            // Scroll headroom so the Contact spine node can reach dead-center
+            // on the photo: the page's natural end alone isn't tall enough to
+            // scroll that far at typical viewport heights. Sits above the
+            // footer's own content, not after it, so the footer stays as
+            // close to the true bottom of the page as this allows.
         >
             <div className="mb-3 flex items-center gap-3 w-full">
                 <span className="text-maroon/60 shrink-0">4 Nodes Linked</span>
