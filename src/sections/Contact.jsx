@@ -47,7 +47,7 @@ const Contact = () => {
         // service_6osa0eb
         // template_6c8cas9
     };
-    return <section id="contact" className="relative flex items-center justify-end c-space pt-4 md:pt-6 pb-6 md:pb-8">
+    return <section id="contact" className="relative flex items-center justify-end c-space pt-4 md:pt-6 pb-4 md:pb-6">
         <AnimatePresence>
             {showAlert && <Alert key="alert" type={alertType} text={alertMessage}/>}
         </AnimatePresence>
@@ -64,7 +64,7 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col items-start justify-center w-full max-w-md border border-cream/10 rounded-2xl bg-[rgba(111,26,7,0.9)] p-6 lg:ml-auto lg:mt-9 shadow-2xl">
-            <div className="flex flex-col items-start w-full gap-3 mb-5">
+            <div className="flex flex-col items-start w-full gap-3 mb-4">
                 <div id="contact-heading-block">
                     <p className="node-label text-sand mb-3">Node 04 &mdash; Contact</p>
                     <h2 className="text-heading text-cream">Contact</h2>
@@ -82,7 +82,7 @@ const Contact = () => {
             </div>
             <div className="mb-4">
                 <label htmlFor="message" className="field-label">Message</label>
-                <textarea id="message" name="message" type='text' className="field-input field-input-focus" rows="4" placeholder="Share your thoughts..." autoComplete="message" value={formData.message} onChange={handleChange} required />
+                <textarea id="message" name="message" type='text' className="field-input field-input-focus" rows="3" placeholder="Share your thoughts..." autoComplete="message" value={formData.message} onChange={handleChange} required />
             </div>
             <button type="submit" disabled={isLoading} className="w-full px-1 py-3 font-mono text-sm uppercase tracking-[0.15em] text-center rounded-md cursor-pointer bg-sand text-maroon-dark font-semibold hover:bg-cream transition-colors hover-animation disabled:opacity-60 disabled:cursor-not-allowed">{!isLoading ? "Send" : "Sending"}</button>
         </form>
