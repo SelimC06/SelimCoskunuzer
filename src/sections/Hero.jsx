@@ -1,11 +1,11 @@
 import HeroText from "../components/HeroText";
-import {Canvas} from "@react-three/fiber";
-import { Car } from "../components/Car";
-import { Environment, AdaptiveDpr } from "@react-three/drei";
 import { useMediaQuery } from "react-responsive";
-import Loader from "../components/Loader";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { useScrollProgressRef } from "../hook/useScrollProgress";
+
+// Three.js and everything it pulls in are split into their own chunk so the
+// rest of the page isn't stuck waiting behind that download/parse.
+const HeroScene = lazy(() => import("../components/HeroScene"));
 
 const Hero = () => {
     const isMobile =useMediaQuery({maxWidth: 853});
@@ -15,22 +15,13 @@ const Hero = () => {
             <HeroText />
             <figure className="absolute inset-0" style={{width: "100vw", height: "100vh"}}>
                 <div className="fixed inset-0 -z-5 pointer-events-none" style={{transform: "translateZ(0)"}}>
-                    <Canvas camera={{position:[0,1,3]}} gl={{ toneMappingExposure: 0.8,  antialias: false, powerPreference: "high-performance" }} dpr={[1, 1.5]} shadows={false}>
-                        <AdaptiveDpr pixelated />
-                        <Suspense fallback={<Loader />}>
-                        <ambientLight intensity={0.7} />
-                        <directionalLight
-                            position={[-4, 6, 3]}
-                            intensity={0.6}
-                        />
-                        <directionalLight
-                            position={[4, 2, -5]}
-                            intensity={0.4}
-                        />
-                        <Environment preset="city" intensity={0.45} /> {/* Studio also works */}
-                        <Car isMobile={isMobile} enableZoom={false} scrollRef={scrollRef} />
-                        </Suspense>
-                    </Canvas>
+                    {/* fallback is null (not Loader) — Loader uses drei's <Html>, which
+                        needs a mounted Canvas/R3F context; this boundary is just for the
+                        HeroScene chunk itself downloading, before Canvas exists at all.
+                        The real loading UI is HeroScene's own inner Suspense/Loader. */}
+                    <Suspense fallback={null}>
+                        <HeroScene isMobile={isMobile} scrollRef={scrollRef} />
+                    </Suspense>
                 </div>
             </figure>
         </section>

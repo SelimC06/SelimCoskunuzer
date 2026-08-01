@@ -144,19 +144,19 @@ const ArtifactViewer = ({ artifact }) => {
         href={artifact.src}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex flex-col rounded-2xl border border-maroon/15 bg-[rgba(111,26,7,0.9)] shadow-lg overflow-hidden h-[280px] lg:h-[300px] hover:bg-[rgba(111,26,7,0.97)] transition-colors"
+        className="group flex flex-col rounded-2xl border border-maroon/15 shadow-lg overflow-hidden h-[280px] lg:h-[300px]"
       >
-        <div className="px-4 py-2 font-mono text-xs uppercase tracking-wide text-cream/80">
+        <div className="px-4 py-2 font-mono text-xs uppercase tracking-wide text-cream/80 bg-[rgba(111,26,7,0.9)] group-hover:bg-[rgba(111,26,7,0.97)] transition-colors">
           {artifact.whatIsIt}
         </div>
         {artifact.image && (
           <img
             src={artifact.image}
             alt={artifact.whatIsIt}
-            className="w-full flex-1 min-h-0 object-contain p-4"
+            className="w-full flex-1 min-h-0 object-contain p-4 bg-paper"
           />
         )}
-        <div className="flex items-center gap-2 font-display text-lg text-cream group-hover:text-sand transition-colors px-6 py-4">
+        <div className="flex items-center gap-2 font-display text-lg text-cream group-hover:text-sand transition-colors px-6 py-4 bg-[rgba(111,26,7,0.9)] group-hover:bg-[rgba(111,26,7,0.97)]">
           Visit site
           <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">&rarr;</span>
         </div>
