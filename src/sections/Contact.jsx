@@ -47,7 +47,16 @@ const Contact = () => {
         // service_6osa0eb
         // template_6c8cas9
     };
-    return <section id="contact" className="relative flex items-center justify-end c-space pt-4 md:pt-6 pb-4 md:pb-6">
+    return <section
+        id="contact"
+        className="relative flex items-center justify-end c-space pb-4 md:pb-6"
+        style={{ paddingTop: "max(1rem, calc(50vh - 305px))" }}
+        // Extra top headroom so that when node 4's spine click lands right at
+        // this section's own top edge (its floor for hiding Experience's
+        // tail), the photo also happens to fall at the viewport's vertical
+        // center rather than high up with dead space below it. Scales with
+        // viewport height like Footer's scroll-headroom calc below.
+    >
         <AnimatePresence>
             {showAlert && <Alert key="alert" type={alertType} text={alertMessage}/>}
         </AnimatePresence>

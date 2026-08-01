@@ -235,6 +235,11 @@ export const mySocials = [
     icon: "/assets/socials/linkedIn.svg",
   },
   {
+    name: "GitHub",
+    href: "https://github.com/SelimC06",
+    icon: "/assets/socials/github.svg",
+  },
+  {
     name: "Instagram",
     href: "https://www.instagram.com/selim_c06/",
     icon: "/assets/socials/instagram.svg",
@@ -243,15 +248,47 @@ export const mySocials = [
 
 export const experiences = [
   {
+    title: "Microsoft",
+    job: "Machine Learning Engineer Intern, MS Teams",
+    image: "/assets/microsoft.png",
+    date: "2026-Present",
+    contents: [
+      "Integrating ML models into MS Teams' production training and evaluation infrastructure while developing knowledge graph systems using graph-based ML techniques, serving 300M+ monthly active users.",
+    ],
+    tags: ["Machine Learning", "Knowledge Graphs", "Production ML"],
+    artifact: {
+      type: "website",
+      whatIsIt: "MS Teams Immersive",
+      src: "https://www.microsoft.com/en-us/microsoft-teams/immersive"
+    }
+  },
+  {
+    title: "Georgia Tech",
+    job: "Machine Learning Researcher",
+    image: "/assets/gatech.png",
+    date: "2026-Present",
+    contents: [
+      "Investigating attention collapse in student GNNs during knowledge distillation using STRIDE, Prof. Behnam's lab framework, achieving 32.3x compression with +2.13% accuracy on OGBN-MAG, under Prof. Payman Behnam at Georgia Tech.",
+      "Identified that uniformity-constrained distillation is the only approach that prevents student attention collapse across ogbn-arxiv, ogbn-products, and ogbn-mag, while baseline and column-balance constraints consistently collapse; analyzing downstream accuracy implications.",
+    ],
+    tags: ["Graph Neural Networks", "Knowledge Distillation", "PyTorch"],
+    artifact: {
+      type: "link",
+      whatIsIt: "SAIL Lab",
+      src: "https://sail.coe.gatech.edu/",
+      image: "/assets/knowledge-distillation.svg"
+    }
+  },
+  {
     title: "Virginia Tech",
-    job: "Machine Learning Project",
+    job: "Machine Learning Researcher",
     image: "/assets/vtech.png",
     date: "2025-2025",
     contents: [
-      "Built a molecular property prediction model with deep learning to analyze molecular structures as graphs.",
-      "Designed data pipelines for SMILES parsing, feature extraction, and graph construction, cutting runtime by 20%.",
+      "Co-first author on Cross-View Topology-Aware Graph Representation Learning (GraphTCL, arXiv:2512.02130) - a dual-view contrastive learning framework aligning GNN structural embeddings with persistent homology via a cross-view InfoNCE loss for graph classification.",
+      "Achieved state-of-the-art on 6/7 TU benchmarks (98.42% on MUTAG, 93.86% on BZR), outperforming GIN, GAT, TopoGCL, and OT-GNN; averaged +3.87% improvement over GCN across 5 OGB molecular graph benchmarks.",
     ],
-    tags: ["PyTorch", "Graph Neural Networks", "Molecular ML", "Python"],
+    tags: ["PyTorch", "Graph Neural Networks", "Contrastive Learning", "Topological Data Analysis"],
     artifact: {
       type: "pdf",
       whatIsIt: "Research Paper",

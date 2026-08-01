@@ -35,7 +35,7 @@ export const Timeline = ({ data }) => {
                             </div>
                         </div>
 
-                        <div className="w-full pl-6 md:pl-8 flex flex-col lg:flex-row items-start gap-10">
+                        <div className="w-full pl-6 md:pl-8 flex flex-col lg:flex-row lg:items-center gap-10">
                             <div className="flex-1 min-w-0">
                             <div className="flex flex-col gap-2">
                                 <h3 className="font-display text-3xl font-bold text-ink text-glow">{item.date}</h3>
@@ -46,7 +46,7 @@ export const Timeline = ({ data }) => {
                                     <img
                                         src={item.image}
                                         alt="vtech"
-                                        className="h-8 w-8 object-contain"
+                                        className={`object-contain ${item.title === "Microsoft" ? "h-6 w-6" : "h-8 w-8"}`}
                                     />
                                     </div>
                                 </div>
@@ -55,9 +55,9 @@ export const Timeline = ({ data }) => {
                                 </h4>
                             </div>
 
-                            <div className="mt-6 ml-2 md:ml-4 max-w-xl">
+                            <div className="mt-6 ml-2 md:ml-4 max-w-xl rounded-2xl border border-maroon/15 bg-paper/90 shadow-sm px-5 py-4">
                                 {item.contents.map((content, i) => (
-                                    <p className="mb-4 font-semibold text-ink text-lg text-glow" key={i}>
+                                    <p className="mb-4 last:mb-0 font-semibold text-ink text-lg" key={i}>
                                         {content}
                                     </p>
                                 ))}
@@ -73,9 +73,11 @@ export const Timeline = ({ data }) => {
                               ))}
                             </div>
                         </div>
-                        <div className="w-full lg:w-[560px] xl:w-[650px] shrink-0 mt-4 lg:mt-0">
-                            <ArtifactViewer artifact={item.artifact} />
-                        </div>
+                        {item.artifact && (
+                            <div className="w-full lg:w-[560px] xl:w-[650px] shrink-0 mt-4 lg:mt-0">
+                                <ArtifactViewer artifact={item.artifact} />
+                            </div>
+                        )}
                         </div>
                     </div>
                 ))}
@@ -131,6 +133,36 @@ const ArtifactViewer = ({ artifact }) => {
       </div>
     );
     }
+
+  // Some sites (most university/corporate pages) refuse to render inside an
+  // iframe at all (X-Frame-Options/CSP frame-ancestors), so this variant
+  // links out instead of embedding — optionally fronted by a representative
+  // image since there's no live preview to show.
+  if (artifact.type === "link") {
+    return (
+      <a
+        href={artifact.src}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex flex-col rounded-2xl border border-maroon/15 bg-[rgba(111,26,7,0.9)] shadow-lg overflow-hidden h-[280px] lg:h-[300px] hover:bg-[rgba(111,26,7,0.97)] transition-colors"
+      >
+        <div className="px-4 py-2 font-mono text-xs uppercase tracking-wide text-cream/80">
+          {artifact.whatIsIt}
+        </div>
+        {artifact.image && (
+          <img
+            src={artifact.image}
+            alt={artifact.whatIsIt}
+            className="w-full flex-1 min-h-0 object-contain p-4"
+          />
+        )}
+        <div className="flex items-center gap-2 font-display text-lg text-cream group-hover:text-sand transition-colors px-6 py-4">
+          Visit site
+          <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">&rarr;</span>
+        </div>
+      </a>
+    );
+  }
 
   return null;
 };

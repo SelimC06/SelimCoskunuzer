@@ -9,7 +9,6 @@ Title: Porsche 911 RAUH-Welt [FREE]
 import * as THREE from "three";
 import React, { useRef, useEffect, useMemo } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
-import { a, useSpring } from "@react-spring/three";
 import { useGLTF } from "@react-three/drei";
 
 export function Car(props) {
@@ -56,7 +55,7 @@ export function Car(props) {
   const base = useMemo(() => {
     const isPortrait = viewport.width / viewport.height < 1;
     const x = isPortrait ? -0.08 : 2.5;
-    const y = isPortrait ? 0 : -0.4;
+    const y = isPortrait ? 0 : 0.2;
     const z = 0;
     return { x, y, z };
   }, [viewport.width, viewport.height]);
@@ -67,18 +66,10 @@ export function Car(props) {
     return { x: p[0] ?? 0, y: p[1] ?? 0, z: p[2] ?? 0 };
   }, [props.position]);
 
-  const [{ springY }, api] = useSpring(() => ({
-    springY: -0,
-    config: { mass: 1, tension: 70, friction: 26 },
-  }));
-
-  const didDrop = useRef(false);
-  useEffect(() => {
-    if (didDrop.current) return;
-    didDrop.current = true;
-    api.set({ springY: base.y + 6 });
-    api.start({ springY: base.y, immediate: true });
-  }, [api, base.y]);
+  // Drops in from above on mount, then settles on whatever `base.y` is
+  // currently (self-healing across resizes/orientation changes, unlike a
+  // one-shot spring targeted at the base.y seen at mount time).
+  const dropY = useRef(base.y + 6);
 
   useFrame((state, delta) => {
     if (!group.current) return;
@@ -99,8 +90,10 @@ export function Car(props) {
     group.current.position.x = THREE.MathUtils.lerp(startX, centerX, ease);
     group.current.position.z = base.z + offset.z;
 
+    dropY.current = THREE.MathUtils.damp(dropY.current, base.y, 2, delta);
+
     const float = Math.sin(t) * 0.03;
-    const baseY = springY.get() + float + offset.y;
+    const baseY = dropY.current + float + offset.y;
 
     const dropAmount = 0.12;
     group.current.position.y = baseY - ease * dropAmount;
@@ -125,7 +118,7 @@ export function Car(props) {
   });
 
   return (
-    <a.group ref={group} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null}>
       <group ref={turnRef} scale={0.01}>
         <group position={[0, 0, -2000]}>
           <mesh
@@ -516,7 +509,7 @@ export function Car(props) {
           position={[1000, 1000, 0]}
         />
       </group>
-    </a.group>
+    </group>
   )
 }
 

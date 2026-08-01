@@ -29,7 +29,6 @@ const Navbar = () => {
                 href="/"
                 className="group flex items-center gap-2.5 font-display text-lg sm:text-xl font-semibold tracking-tight text-cream transition-colors hover:text-sand"
                 >
-                    <span className="w-2 h-2 rounded-full bg-sand shrink-0" />
                     Selim Coskunuzer
                 </a>
                 <button
