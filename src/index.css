@@ -1,40 +1,70 @@
-@import url("https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 @theme {
-  /* Canvas */
-  --color-cream: #f7f3e3;
-  --color-paper: #fffdf7;
+  /* Canvas — warm parchment, kept from the existing Texas A&M identity */
+  --color-cream: oklch(96% 0.02 85);
+  --color-paper: oklch(99% 0.01 85);
 
-  /* Brand maroon */
-  --color-maroon: #6f1a07;
-  --color-maroon-dark: #431006;
+  /* Brand maroon — a stable dark surface color in both themes (navbar,
+     contact panel, borders): a "maroon" that turned pale in dark mode
+     wouldn't read as the brand anymore. */
+  --color-maroon: oklch(32% 0.13 32);
+  --color-maroon-dark: oklch(20% 0.10 30);
 
-  /* Ember accent — the network's activation color, tuned deeper here so it
-     still reads clearly against a light cream canvas */
-  --color-ember: #c1531f;
+  /* Same hue, used only where maroon is the TEXT color against the page
+     canvas (headings, hero name) — needs to lighten in dark mode for
+     contrast, which would fight --color-maroon's job as a surface color if
+     they were the same token. Identical to --color-maroon in light mode. */
+  --color-maroon-bright: oklch(32% 0.13 32);
 
-  /* Sand, sampled from the hero car's own connector-line material */
-  --color-sand: #d2b48c;
+  /* Ember accent — the network's activation color: active nodes, links, focus */
+  --color-ember: oklch(58% 0.15 45);
 
-  /* Text */
-  --color-ink: #33303a;
-  --color-ink-soft: #6b6670;
+  /* Sand — secondary accent, edges/rules, photo frame trim */
+  --color-sand: oklch(78% 0.06 75);
 
-  --font-display: "Space Grotesk", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  /* Text — warm neutrals (corrected from an accidental cool-violet cast) */
+  --color-ink: oklch(24% 0.02 50);
+  --color-ink-soft: oklch(45% 0.02 50);
 
-  --animate-orbit: orbit 50s linear infinite;
-  @keyframes orbit {
-    0% {
-      transform: rotate(calc(var(--angle) * 1deg))
-        translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
-    }
-    100% {
-      transform: rotate(calc(var(--angle) * 1deg + 360deg))
-        translateY(calc(var(--radius) * 1px))
-        rotate(calc((var(--angle) * -1deg) - 360deg));
-    }
-  }
+  /* Fixed light neutral for content sitting on maroon surfaces (nav, contact
+     panel, artifact viewer headers) — those surfaces are always dark, in
+     either theme, so this deliberately does NOT flip in dark mode the way
+     --color-cream (the page canvas) does. */
+  --color-on-maroon: oklch(97% 0.015 85);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Type scale — see DESIGN.md §3 for what each level is for */
+  --text-hero: 4rem;
+  --text-h1: 2.5rem;
+  --text-h2: 1.5rem;
+  --text-lede: 1.125rem;
+  --text-body: 1rem;
+  --text-label: 0.8125rem;
+  --text-micro: 0.6875rem;
+
+  /* Spacing — 4px base unit, referenced everywhere instead of ad-hoc values */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* Radii — four sizes, each with one job (see DESIGN.md §5) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+
+  --shadow-card: 0 4px 20px rgb(0 0 0 / 0.08);
+
   --animate-marquee: marquee 50s linear infinite;
   --animate-marquee-vertical: marquee-vertical 50s linear infinite;
 
@@ -61,29 +91,55 @@
     50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(193, 83, 31, 0); }
   }
 }
+
+/* Dark mode — kept dormant behind [data-theme="dark"] rather than
+   prefers-color-scheme: the cream/maroon parchment look is the actual
+   design identity, so it should be the default regardless of OS setting.
+   Wire up a manual toggle that sets this attribute if dark mode is wanted
+   later. */
+[data-theme="dark"] {
+    --color-cream: oklch(18% 0.015 50);
+    --color-paper: oklch(22% 0.018 50);
+    --color-maroon: oklch(38% 0.14 25);
+    --color-maroon-dark: oklch(24% 0.11 25);
+    --color-maroon-bright: oklch(62% 0.14 32);
+    --color-ember: oklch(72% 0.17 55);
+    --color-sand: oklch(70% 0.05 75);
+    --color-ink: oklch(92% 0.015 85);
+    --color-ink-soft: oklch(70% 0.02 70);
+}
+
 @layer utilities {
   /* Soft white glow behind dark text — keeps About/Experience copy readable
-     no matter what part of the fixed 3D car happens to sit behind it as you
-     scroll. Multiple stacked layers because a single pass reads too faint
-     wherever a dark cube crosses directly behind the letters. */
+     no matter what part of the page's background pattern sits behind it. */
   .text-glow {
     text-shadow:
-      0 0 3px #fff, 0 0 3px #fff, 0 0 3px #fff,
-      0 0 6px #fff, 0 0 6px #fff,
-      0 0 10px #fff;
+      0 0 3px var(--color-cream), 0 0 3px var(--color-cream), 0 0 3px var(--color-cream),
+      0 0 6px var(--color-cream), 0 0 6px var(--color-cream),
+      0 0 10px var(--color-cream);
   }
 }
+
 body {
   background-color: var(--color-cream);
   background-image: radial-gradient(rgba(111, 26, 7, 0.07) 1px, transparent 1px);
   background-size: 28px 28px;
-  font-family: "Funnel Display", sans-serif;
+  font-family: var(--font-serif);
   color: var(--color-ink);
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 .c-space {
@@ -97,17 +153,20 @@ html {
 }
 
 .section-spacing {
-  @apply min-h-screen mt-20 md:mt-30;
+  @apply mt-24 md:mt-32;
 }
 
 .text-heading {
-  @apply font-display font-bold text-3xl md:text-4xl tracking-tight;
+  @apply font-display font-bold tracking-tight;
+  font-size: var(--text-h1);
 }
 
 /* Node-style section kicker — a small pulsing dot instead of a static label,
    since every section on this page is framed as a node in the graph. */
 .node-label {
-  @apply font-mono uppercase text-xs tracking-[0.25em] font-medium inline-flex items-center gap-2.5;
+  @apply font-mono uppercase font-medium inline-flex items-center gap-2.5;
+  font-size: var(--text-label);
+  letter-spacing: 0.2em;
 }
 
 .node-label::before {
@@ -174,11 +233,12 @@ html {
 }
 
 .nav-link {
-  @apply relative text-lg md:text-sm md:font-medium md:tracking-wide md:uppercase transition-colors text-cream/80 hover:text-cream;
+  @apply relative text-lg md:text-sm md:font-medium md:tracking-wide md:uppercase transition-colors text-on-maroon/80 hover:text-on-maroon;
+  font-family: var(--font-display);
 }
 
 .nav-link.is-active {
-  @apply text-cream;
+  @apply text-on-maroon;
 }
 
 /* underline that grows in from the left on hover/active */
@@ -200,13 +260,53 @@ html {
 
 /* Contact Section*/
 .field-label {
-  @apply font-mono text-xs uppercase tracking-[0.15em] text-cream/70 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  @apply font-mono uppercase text-on-maroon/70 leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70;
+  font-size: var(--text-label);
+  letter-spacing: 0.15em;
 }
 
 .field-input {
-  @apply w-full min-h-10 rounded-md px-3 py-2 text-sm bg-cream/10 text-cream transition duration-200 placeholder-cream/40 border border-cream/15 mt-2;
+  @apply w-full min-h-10 px-3 py-2 text-sm bg-on-maroon/10 text-on-maroon transition duration-200 placeholder-on-maroon/40 border border-on-maroon/15 mt-2;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
 }
 
 .field-input-focus {
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sand/60 focus-visible:border-sand/60;
+}
+
+/* Hero graph — the one load-once signature animation on the page. Each rule
+   ends on its lit/final frame and never repeats, so reduced-motion (which
+   forces a 1-iteration, near-zero-duration run globally) lands on the
+   correct end state rather than an arbitrary mid-frame. */
+@keyframes hg-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+.hg-edge {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: hg-draw 0.5s ease-out forwards;
+}
+
+@keyframes hg-pop {
+  from { opacity: 0; transform: scale(0.4); }
+  to { opacity: 1; transform: scale(1); }
+}
+.hg-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: hg-pop 0.35s ease-out forwards;
+}
+
+@keyframes hg-label-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hg-label {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: hg-label-in 0.4s ease-out forwards;
 }

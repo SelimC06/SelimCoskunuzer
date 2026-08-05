@@ -1,17 +1,25 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useActiveSection, sections } from "../hook/useActiveSection";
+import { scrollSpineNode } from "../utils/spineScroll";
 
 function Navigation({ onNavigate, active }) {
+    const handleClick = (e, s) => {
+        onNavigate?.();
+        if (!s.centerTargetId) return; // home keeps the plain top-of-page jump
+        e.preventDefault();
+        scrollSpineNode(s.id, s.centerTargetId);
+    };
+
     return <ul className="nav-ul">
-        {sections.map(({ id, label }) => (
-            <li className="nav-li" key={id}>
+        {sections.map((s) => (
+            <li className="nav-li" key={s.id}>
                 <a
-                    className={`nav-link font-bold${active === id ? " is-active" : ""}`}
-                    href={`#${id}`}
-                    onClick={onNavigate}
+                    className={`nav-link font-bold${active === s.id ? " is-active" : ""}`}
+                    href={`#${s.id}`}
+                    onClick={(e) => handleClick(e, s)}
                 >
-                    {label}
+                    {s.label}
                 </a>
             </li>
         ))}
@@ -22,12 +30,12 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const active = useActiveSection();
 
-    return <div className="fixed inset-x-0 z-40 w-full backdrop-blur-lg border-b border-cream/10" style={{backgroundColor: "var(--color-maroon)"}}>
+    return <div className="fixed inset-x-0 z-40 w-full backdrop-blur-lg border-b border-on-maroon/10" style={{backgroundColor: "var(--color-maroon)"}}>
         <div className="mx-auto c-space max-w-7xl">
             <div className="flex items-center justify-between py-3 sm:py-3.5">
                 <a
                 href="/"
-                className="group flex items-center gap-2.5 font-display text-lg sm:text-xl font-semibold tracking-tight text-cream transition-colors hover:text-sand"
+                className="group flex items-center gap-2.5 font-display text-lg sm:text-xl font-semibold tracking-tight text-on-maroon transition-colors hover:text-sand"
                 >
                     Selim Coskunuzer
                 </a>
@@ -45,7 +53,7 @@ const Navbar = () => {
                 <nav className="hidden sm:flex"><Navigation active={active} /></nav>
             </div>
         </div>
-        {isOpen && (<motion.div className="block overflow-hidden text-center sm:hidden border-t border-cream/10" initial={{ opacity: 0, x:-10}} animate={{ opacity: 1, x:0}} style={{ maxHeight: "100vh"}} transition={{ duration: 1}}>
+        {isOpen && (<motion.div className="block overflow-hidden text-center sm:hidden border-t border-on-maroon/10" initial={{ opacity: 0, x:-10}} animate={{ opacity: 1, x:0}} style={{ maxHeight: "100vh"}} transition={{ duration: 1}}>
             <nav className="pb-5">
                 <Navigation onNavigate={() => setIsOpen(false)} active={active} />
             </nav>

@@ -17,7 +17,7 @@ const Alert = ({ type, text }) => {
       <div
         className={`p-2 ${
           type === "danger" ? "bg-red-800" : "bg-maroon"
-        } items-center text-cream leading-none lg:rounded-full flex lg:inline-flex rounded-md p-5 shadow-2xl border border-cream/10`}
+        } items-center text-on-maroon leading-none lg:rounded-full flex lg:inline-flex rounded-md p-5 shadow-2xl border border-on-maroon/10`}
       >
         <p
           className={`flex rounded-full font-mono ${

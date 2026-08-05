@@ -1,29 +1,13 @@
 import HeroText from "../components/HeroText";
-import { useMediaQuery } from "react-responsive";
-import { Suspense, lazy } from "react";
-import { useScrollProgressRef } from "../hook/useScrollProgress";
-
-// Three.js and everything it pulls in are split into their own chunk so the
-// rest of the page isn't stuck waiting behind that download/parse.
-const HeroScene = lazy(() => import("../components/HeroScene"));
+import HeroGraph from "../components/HeroGraph";
 
 const Hero = () => {
-    const isMobile =useMediaQuery({maxWidth: 853});
-    const scrollRef = useScrollProgressRef();
     return (
-        <section id="home" className="relative flex items-start justify-center md:items-start md:justify-start min-h-screen overflow-x-hidden">
+        <section id="home" className="relative flex flex-col md:flex-row items-center md:items-center justify-center md:justify-between min-h-screen c-space gap-10 pt-28 md:pt-0">
             <HeroText />
-            <figure className="absolute inset-0" style={{width: "100vw", height: "100vh"}}>
-                <div className="fixed inset-0 -z-5 pointer-events-none" style={{transform: "translateZ(0)"}}>
-                    {/* fallback is null (not Loader) — Loader uses drei's <Html>, which
-                        needs a mounted Canvas/R3F context; this boundary is just for the
-                        HeroScene chunk itself downloading, before Canvas exists at all.
-                        The real loading UI is HeroScene's own inner Suspense/Loader. */}
-                    <Suspense fallback={null}>
-                        <HeroScene isMobile={isMobile} scrollRef={scrollRef} />
-                    </Suspense>
-                </div>
-            </figure>
+            <div className="w-full max-w-lg md:max-w-2xl flex justify-center md:justify-end shrink-0">
+                <HeroGraph />
+            </div>
         </section>
     )
 }

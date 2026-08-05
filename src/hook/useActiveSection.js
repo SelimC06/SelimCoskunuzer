@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 export const sections = [
     { id: "home", label: "Home" },
     { id: "about", label: "About", centerTargetId: "about-photo" },
+    { id: "research", label: "Research", centerTargetId: "research-heading-block" },
     { id: "Experience", label: "Experience", centerTargetId: "experience-heading-block" },
     { id: "contact", label: "Contact", centerTargetId: "contact-photo" },
 ];

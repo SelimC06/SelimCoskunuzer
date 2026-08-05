@@ -1,6 +1,7 @@
 "use client";
 import { useScroll, useTransform, motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
+import ArtifactViewer from "./ArtifactViewer";
 
 export const Timeline = ({ data }) => {
     const ref = useRef(null);
@@ -21,10 +22,10 @@ export const Timeline = ({ data }) => {
     const opacityTransform = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
 
     return (
-        <div className="c-space pt-10 pb-4 md:pb-6" ref={containerRef}>
+        <div className="c-space mt-24 md:mt-32 pt-20 pb-4 md:pb-6" ref={containerRef}>
             <div id="experience-heading-block">
-                <p className="node-label text-ember relative md:top-4">Node 03 &mdash; Experience</p>
-                <h2 className="text-heading text-ink text-glow relative md:top-4 mt-3">My Work Experience</h2>
+                <p className="node-label text-ember relative md:top-4">Node 04 &mdash; Experience</p>
+                <h2 className="text-heading text-ink text-glow relative md:top-4 mt-3">Experience</h2>
             </div>
             <div ref={ref} className="relative pb-10 mt-6">
                 {data.map((item) => (
@@ -42,10 +43,10 @@ export const Timeline = ({ data }) => {
                                 <div className="flex items-center gap-3">
                                 <h3 className="font-display text-xl md:text-2xl font-bold text-ink text-glow">
                                     {item.title}</h3>
-                                    <div className="flex items-center rounded-xl border border-maroon/15 bg-paper px-1 py-1 shadow-sm w-fit">
+                                    <div className="flex items-center border border-maroon/15 bg-paper px-1 py-1 w-fit" style={{ borderRadius: "var(--radius-md)" }}>
                                     <img
                                         src={item.image}
-                                        alt="vtech"
+                                        alt={`${item.title} logo`}
                                         className={`object-contain ${item.title === "Microsoft" ? "h-6 w-6" : "h-8 w-8"}`}
                                     />
                                     </div>
@@ -55,9 +56,9 @@ export const Timeline = ({ data }) => {
                                 </h4>
                             </div>
 
-                            <div className="mt-6 ml-2 md:ml-4 max-w-xl rounded-2xl border border-maroon/15 bg-paper/90 shadow-sm px-5 py-4">
+                            <div className="mt-6 ml-2 md:ml-4 max-w-[60ch] border border-maroon/15 bg-paper/90 px-5 py-4" style={{ borderRadius: "var(--radius-lg)" }}>
                                 {item.contents.map((content, i) => (
-                                    <p className="mb-4 last:mb-0 font-semibold text-ink text-lg" key={i}>
+                                    <p className="mb-3 last:mb-0 font-serif text-ink" style={{ fontSize: "var(--text-body)", lineHeight: 1.6 }} key={i}>
                                         {content}
                                     </p>
                                 ))}
@@ -98,71 +99,4 @@ export const Timeline = ({ data }) => {
             </div>
         </div>
     );
-};
-
-const ArtifactViewer = ({ artifact }) => {
-  if (!artifact) return null;
-
-  if (artifact.type === "pdf") {
-    return (
-      <div className="rounded-2xl border border-maroon/15 bg-[rgba(111,26,7,0.9)] shadow-lg overflow-hidden">
-        <div className="px-4 py-2 font-mono text-xs uppercase tracking-wide text-cream/80">
-          {artifact.whatIsIt}
-        </div>
-        <iframe
-          src={`${artifact.src}#toolbar=0&navpanes=0&scrollbar=0`}
-          className="w-full h-[280px] lg:h-[300px] flex-1"
-          loading="lazy"
-        />
-      </div>
-    );
-  }
-
-  if (artifact.type === "website") {
-    return (
-      <div className="rounded-2xl border border-maroon/15 bg-[rgba(111,26,7,0.9)] shadow-lg overflow-hidden">
-        <div className="px-4 py-2 font-mono text-xs uppercase tracking-wide text-cream/80">
-          {artifact.whatIsIt}
-        </div>
-        <iframe
-          src={artifact.src}
-          className="w-full h-[280px] lg:h-[300px] flex-1"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-          loading="lazy"
-        />
-      </div>
-    );
-    }
-
-  // Some sites (most university/corporate pages) refuse to render inside an
-  // iframe at all (X-Frame-Options/CSP frame-ancestors), so this variant
-  // links out instead of embedding — optionally fronted by a representative
-  // image since there's no live preview to show.
-  if (artifact.type === "link") {
-    return (
-      <a
-        href={artifact.src}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group flex flex-col rounded-2xl border border-maroon/15 shadow-lg overflow-hidden h-[280px] lg:h-[300px]"
-      >
-        <div className="px-4 py-2 font-mono text-xs uppercase tracking-wide text-cream/80 bg-[rgba(111,26,7,0.9)] group-hover:bg-[rgba(111,26,7,0.97)] transition-colors">
-          {artifact.whatIsIt}
-        </div>
-        {artifact.image && (
-          <img
-            src={artifact.image}
-            alt={artifact.whatIsIt}
-            className="w-full flex-1 min-h-0 object-contain p-4 bg-paper"
-          />
-        )}
-        <div className="flex items-center gap-2 font-display text-lg text-cream group-hover:text-sand transition-colors px-6 py-4 bg-[rgba(111,26,7,0.9)] group-hover:bg-[rgba(111,26,7,0.97)]">
-          Visit site
-          <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">&rarr;</span>
-        </div>
-      </a>
-    );
-  }
-
-  return null;
 };
