@@ -24,7 +24,7 @@ export const research = [
     shortTitle: "STRIDE",
     venue: "Georgia Tech, SAIL Lab",
     description:
-      "Identified that uniformity-constrained distillation is the only approach that prevents student-GNN attention collapse across ogbn-arxiv, ogbn-products, and ogbn-mag — baseline and column-balance constraints consistently collapse. 32.3x compression with +2.13% accuracy on OGBN-MAG.",
+      "Ran and analyzed 280 GNN knowledge-distillation experiments (~311 GPU-hours) across ogbn-products, ogbn-arxiv, and roman-empire, evaluating compression strategies, attention behavior, and regularization methods. Investigated attention collapse in GNN distillation, compressing GATv2 teachers into GraphSAGE students by up to 170x.",
     tags: ["Graph Neural Networks", "Knowledge Distillation", "PyTorch"],
     artifact: {
       type: "link",
@@ -96,9 +96,8 @@ export const experiences = [
     image: "/assets/gatech.png",
     date: "2026-Present",
     contents: [
-      "Study why student GNNs collapse during knowledge distillation, under Prof. Payman Behnam's lab framework, STRIDE.",
-      "Found that uniformity-constrained distillation is the only method that avoids attention collapse across ogbn-arxiv, ogbn-products, and ogbn-mag.",
-      "Result: 32.3x compression with +2.13% accuracy on OGBN-MAG.",
+      "Ran and analyzed 280 GNN knowledge-distillation experiments (~311 GPU-hours) across ogbn-products, ogbn-arxiv, and roman-empire, evaluating compression strategies, attention behavior, and regularization methods.",
+      "Investigated attention collapse in GNN distillation, compressing GATv2 teachers into GraphSAGE students by up to 170x.",
     ],
     tags: ["Graph Neural Networks", "Knowledge Distillation", "PyTorch"],
     artifact: {
